@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +15,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if(QMessageBox::question(this,"Close","Do you want to close this application?")==QMessageBox::No){
+        event->ignore(); //No close app
+    }
+}
+
 void MainWindow::on_pbInfor_clicked()
 {
     QMessageBox::information(this,"Infor","Xin chao cac ban!!");
@@ -23,8 +31,6 @@ void MainWindow::on_pbWarning_clicked()
 {
     QMessageBox::warning(this,"Warning","Canh bao!!");
 }
-
-
 
 void MainWindow::on_pbCritical_clicked()
 {
